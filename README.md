@@ -94,6 +94,7 @@ public class ReadStrategy {
     public String getName() {
         return this.inputName;
     }
+}
 
 ```
 
@@ -144,6 +145,7 @@ public int numberSentence(String line) {
             }
         } // end of the line
         // more code
+}
 
 ```
 
@@ -197,6 +199,7 @@ public void countAll(String line) {
         int i = counter.countSentence(line);
         sentenceNumbers += i;
     }
+}
 
 ```
 
@@ -230,5 +233,6 @@ public void countAll(String line) {
         }
         totalSentences += counter.numberSentence(line);
     }
+}
 
 ```
