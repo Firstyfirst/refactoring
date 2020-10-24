@@ -103,13 +103,6 @@ In `src/readability/strategy/Counter.java` file :
 
 ``` java
 
-/**
- * count the sentence in a line
- * @param line the line that seperate with \n 
- * @return return number of sentence in a line. 
- * If the line do not have sentence and next line
- * is blank line, count it as sentence
- */
 public int countSentence(String line) {
     int sentencegroups = 0;
     String[] lines = line.split("\\s+");
@@ -121,15 +114,61 @@ public int countSentence(String line) {
             sentencegroups++;
         }
     } // end of the line
+    // more code
+}
 
-    if (sentencegroups == 0) nosentence = true;
-    // if there is not a sentence in line 
-    // and next line is blank line, count as a sentence
-    if (nosentence && line.isBlank()) {
-        nosentence = false; 
-        sentencegroups++;
-    }
-    return sentencegroups;
+```
+
+- Problem :
+    - Naming of method.
+    - The suffix checking in if statement is too long.
+    
+- Refactoring :
+    - Change the method name.
+    - Replace with contains method and the constant in if statement.
+    
+
+``` java
+
+public int numberSentence(String line) {
+        int sentenceGroups = 0;
+        String[] lines = line.split("\\s+");
+        final String SUFFIX = ".;!?";
+        for(String word: lines) {
+            // the word end with ".", ";", "!", "?"
+            //if (word.endsWith(".") || word.endsWith(";") || word.endsWith("!") || word.endsWith("?")) {
+            if (SUFFIX.contains(word.substring(word.length()-1))) {
+                String subword = word.substring(0, word.length() - 1);
+                if (isNumeric(subword)) sentenceGroups--;
+                sentenceGroups++;
+            }
+        } // end of the line
+        // more code
+
+```
+
+## countSyllable(String word) method :
+
+In `src/readability/strategy/Counter.java` file :
+
+``` java
+
+public int countSyllable(String word) {
+    // some code
+}
+
+```
+
+- Problem:
+    - Naming of method.
+
+- Refactoring:
+    - Change name of method.
+    
+``` java
+
+public int numberSyllable(String word) {
+    // some code
 }
 
 ```
