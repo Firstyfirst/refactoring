@@ -203,10 +203,12 @@ public void countAll(String line) {
 - Problems :
     - n valuable is the bad naming.
     - Unnessescary valuable i.
+    - "line.equals("")" is not a unsense method.  
   
 - Refactoring :
     - Change valuable name "n" to "wordSyllables".
     - Put the "counter.countSentence(line)" in the same line as "sentenceNumbers".
+    - Change from "line.equals("")" to "line.isBlank()".
     
 
 ``` java
