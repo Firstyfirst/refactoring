@@ -2,7 +2,7 @@
 
 Code from my PA4-project (Readability) : https://github.com/b6210545602/PA4
 
-## Attribute type and getter method
+## Attribute type and getter method :
 
 In `src/readability/strategy/Readstrategy.java` file :
 
@@ -159,16 +159,74 @@ public int countSyllable(String word) {
 
 ```
 
-- Problem:
-    - Naming of method.
+- Problem : Naming of method.
 
-- Refactoring:
-    - Change name of method.
+- Refactoring : Change name of method.
     
 ``` java
 
 public int numberSyllable(String word) {
     // some code
 }
+
+```
+
+## countAll(String line) method :
+
+In `src/readability/strategy/ReadStrategy.java` file :
+
+``` java
+
+public void countAll(String line) {
+        //count line
+        lineNumbers++;
+        
+        Counter counter = new Counter();
+        if (!line.equals("")) {
+            String[] wordList = line.split("[.,()_/:!?;]|\\s|\"");
+            // count syllable
+            for(String word: wordList) {
+                int n = counter.countSyllable(word.toLowerCase());
+                syllableNumbers += n;
+                if (n > 0) {
+                    // it is a word
+                    wordNumbers++;
+                }
+            }
+        }
+        int i = counter.countSentence(line);
+        sentenceNumbers += i;
+    }
+
+```
+
+- Problems :
+    - n valuable is the bad naming.
+    - Unnessescary valuable i.
+  
+- Refactoring :
+    - Change valuable name "n" to "wordSyllables".
+    - Put the "counter.countSentence(line)" in the same line as "sentenceNumbers".
+    
+
+``` java
+
+public void countAll(String line) {
+        //count line
+        totalLines++;
+        
+        Counter counter = new Counter();
+        if (!line.isBlank()) {
+            String[] wordList = line.split("[.,()_/:!?;]|\\s|\"");
+            // count syllable
+            for(String word: wordList) {
+                int wordSyllables = counter.numberSyllable(word);
+                totalSyllables += wordSyllables;
+                //it is a word
+                if (wordSyllables > 0) totalWords++;
+            }
+        }
+        totalSentences += counter.numberSentence(line);
+    }
 
 ```
